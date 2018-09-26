@@ -8,3 +8,5 @@ POSist Solution (Currently Working On)
 Infogain-Power Sort Solution
 
 Knoldus Palindrome Solution
+
+BinaryBoot solutions ('Denomination Change' type questions)
