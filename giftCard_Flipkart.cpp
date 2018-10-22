@@ -3,14 +3,36 @@ using namespace std;
 void countGiftcard(int arr[],int amount,int size) // size is needed pre computed as if we try to get the size of arr in function it will give the size of pointer
 {
     int cardCount[size] = { 0 };
-    for (int i = 0; i < size; i++) {
-        if (amount >= arr[i]) { // check if our amount is more than the first highest card value and so on...
+    int temp=amount,flag=0,i=0,cnt=0,j=0;
+    for (; i < size; i++) {
+    	
+
+		 if (amount >= arr[i] ) { // check if our amount is more than the first highest card value and so on...
             cardCount[i] = amount / arr[i]; //how many cards of this value can be given to accomodate the amount
             amount = amount - cardCount[i] * arr[i]; // subtract the amount of which we have issued the cards
-        }
+        }       
+		cnt++; 
     }
+	if(amount%arr[size-1]!=0){ // Backtrack The Solution 
+		cnt--;
+		for(j=cnt;j>=0;j--){
+	        amount=amount+arr[j]*cardCount[j];
+	        if(amount%arr[cnt]!=0){
+	        	continue;
+			}
+			if(amount%arr[cnt]==0){
+				cardCount[cnt-1]=0;
+			cardCount[cnt] = amount / arr[cnt]; //how many cards of this value can be given to accomodate the amount
+            amount = amount - cardCount[cnt] * arr[cnt]; // subtract the amount of which we have issued the cards
+				cnt--;
+			}
+			if(amount==0){
+				break;
+			}
+		}	
+	}
      if(amount>0){ // if amount in the end is not zero that means some value is still there but cannot be filled by our card values
-     	cout<<"sorry you cannot buy gift cards for given value";
+     	cout<<"sorry you cannot buy gift cards for the given value";
      	exit(0);
 	 }
     cout << "Gift Card Count ->" << endl;

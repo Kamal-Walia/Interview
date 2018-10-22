@@ -6,13 +6,20 @@ void countGiftcard(int min,int max,int amount)
 	int cardCount[100] = { 0 };
 	int valueCount[100] = { 0 };
 	if(amount<min){ // if the requested amount is less the lower bound
-		cout<<"sorry this request could not be processed";
+		cout<<"Sorry This Request Could Not Be Processed";
 		exit(0);
 	}
 	else{
 		temp=max;
 		for (int i = min; i <=max; i++) { // check in the range given starting from max to min to get cards of highest values
         if (amount >= temp) {
+        	if(amount%temp!=0 &&amount%max<min){
+        		cardCount[count]=1;
+        		amount=amount-min;
+        		valueCount[count]=min;
+            	 count++;
+        		
+			}
             cardCount[count] = amount / temp;
             amount = amount - cardCount[count] * temp;
             valueCount[count]=temp;
